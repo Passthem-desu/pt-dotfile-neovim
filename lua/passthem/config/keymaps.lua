@@ -74,6 +74,8 @@ vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "竖直分屏" })
 vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "水平分屏" })
 vim.keymap.set("n", "<leader>wd", "<cmd>close<CR>", { desc = "关闭当前分屏" })
 
+vim.keymap.set("n", "<C-_>", "<C-w>s<cmd>edit term://fish<CR>a", { desc = "打开一个控制台" })
+
 
 --->
 ---> LSP 相关
