@@ -39,7 +39,7 @@ return {
                 "tailwindcss",
 
                 -- misc
-                "just-lsp",
+                "just",
                 "dockerls",
                 "docker_compose_language_service",
                 "taplo",  -- toml 支持
