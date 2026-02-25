@@ -35,8 +35,8 @@ return {
                 "clangd",
 
                 -- web
-                "svelte-language-server",
-                "tailwindcss-language-server",
+                "svelte",
+                "tailwindcss",
 
                 -- misc
                 "just",
