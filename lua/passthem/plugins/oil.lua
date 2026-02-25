@@ -24,7 +24,7 @@ return {
                 },
                 skip_confirm_for_simple_edits = true,
                 win_options = {
-                    signcolumn = "yes:3",
+                    signcolumn = "yes:2",
                 },
             })
 
