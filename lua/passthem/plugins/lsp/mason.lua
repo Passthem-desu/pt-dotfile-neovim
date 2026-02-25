@@ -36,6 +36,7 @@ return {
 
                 -- web
                 "svelte-language-server",
+                "tailwindcss-language-server",
 
                 -- misc
                 "just",
