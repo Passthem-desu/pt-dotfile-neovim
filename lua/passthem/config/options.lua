@@ -54,7 +54,7 @@ vim.opt.inccommand = "split"
 vim.opt.ignorecase = true
 
 -- 当搜索内容时，除非搜索词含有大写，不然都匹配小写
-vim.opt.smartcase = t
+vim.opt.smartcase = true
 
 vim.opt.hlsearch = true
 
@@ -68,11 +68,11 @@ vim.opt.termguicolors = true
 
 vim.opt.background = "dark"
 
--- 滚动时预留 8 行
-vim.opt.scrolloff = 8
+-- 滚动时预留行数
+vim.opt.scrolloff = 10
 
 -- 给行号一列多余的空间
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:1"
 
 -- 对于不同的模式，光标更改成不同的模式
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
@@ -83,10 +83,11 @@ vim.opt.cmdheight = 0
 -- vim.opt.cmdheight = 1
 
 -- 在第 80 列显示一个墙，表示该行过长
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = ""
 
 -- 标注光标所在行
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 
 --->
