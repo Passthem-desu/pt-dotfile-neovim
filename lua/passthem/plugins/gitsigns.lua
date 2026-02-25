@@ -28,7 +28,7 @@ return {
             map("n", "<leader>gR", gs.reset_buffer, "git 重置文件") -- unstage whole buffer
             map("n", "<leader>gu", gs.undo_stage_hunk, "git 撤销编辑块")
             map("n", "<leader>gp", gs.preview_hunk, "git 预览编辑块")
-            map("n", "<leader>gbl", function() gs.blame_line({ full = true }) end, "git 查看当前行编辑历史")
+            map("n", "<leader>gl", function() gs.blame_line({ full = true }) end, "git 查看当前行编辑历史")
             map("n", "<leader>gB", gs.toggle_current_line_blame, "切换 git 历史")
             map("n", "<leader>gd", gs.diffthis, "git 查看 diff")
             map("n", "<leader>gD", function() gs.diffthis("~") end, "git 查看 diff ~")
