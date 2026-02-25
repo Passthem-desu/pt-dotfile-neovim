@@ -34,6 +34,9 @@ return {
                 -- c/c++
                 "clangd",
 
+                -- web
+                "svelte-language-server",
+
                 -- misc
                 "just",
                 "dockerls",
