@@ -20,7 +20,7 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- 在粘贴时，不替换剪切板
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set("v", "p", '"_dp', opts)
+vim.keymap.set("v", "p", '"_dhp', opts)
 
 -- 在删除时，如果使用 <leader>d，则不会把删除内容放在剪切板
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])

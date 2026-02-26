@@ -37,6 +37,7 @@ return {
                 -- web
                 "svelte",
                 "tailwindcss",
+                "astro",
 
                 -- misc
                 "just",

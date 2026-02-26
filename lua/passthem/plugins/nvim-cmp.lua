@@ -9,23 +9,12 @@ return {
         "hrsh7th/cmp-path", -- source for file system paths
         "hrsh7th/cmp-cmdline",
         "f3fora/cmp-spell",
-        {
-            "L3MON4D3/LuaSnip",
-            -- follow latest release.
-            version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-            -- install jsregexp (optional!).
-            build = "make install_jsregexp",
-        },
-        "saadparwaiz1/cmp_luasnip", -- autocompletion
-        "rafamadriz/friendly-snippets", -- snippets
         "nvim-treesitter/nvim-treesitter",
         "onsails/lspkind.nvim", -- vs-code pictograms
         "roobert/tailwindcss-colorizer-cmp.nvim",
     },
     config = function()
         local cmp = require("cmp")
-        -- local luasnip = require("luasnip")
-        local has_luasnip, luasnip = pcall(require, 'luasnip')
         local lspkind = require("lspkind")
         local colorizer = require("tailwindcss-colorizer-cmp").formatter
 
@@ -65,21 +54,6 @@ return {
         local column = function()
             local _line, col = unpack(vim.api.nvim_win_get_cursor(0))
             return col
-        end
-
-        -- luasnip custom function
-        local in_snippet = function()
-            local session = require('luasnip.session')
-            local node = session.current_nodes[vim.api.nvim_get_current_buf()]
-            if not node then
-                return false
-            end
-            local snippet = node.parent.snippet
-            local snip_begin_pos, snip_end_pos = snippet.mark:pos_begin_end()
-            local pos = vim.api.nvim_win_get_cursor(0)
-            if pos[1] - 1 >= snip_begin_pos[1] and pos[1] - 1 <= snip_end_pos[1] then
-                return true
-            end
         end
 
         -- returns true if the cursor is in leftmost column or at a whitespace char
@@ -203,9 +177,6 @@ return {
         end
 
 
-        -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-        require("luasnip.loaders.from_vscode").lazy_load()
-
         cmp.setup.cmdline(":", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
@@ -238,15 +209,8 @@ return {
             --         border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
             --     }
             -- },
-            -- config nvim cmp to work with snippet engine
-            snippet = {
-                expand = function(args)
-                    luasnip.lsp_expand(args.body)
-                end,
-            },
             -- autocompletion sources
             sources = cmp.config.sources({
-                { name = "luasnip" }, -- snippets
                 { name = "lazydev" },
                 { name = "nvim_lsp"},
                 { name = "buffer" }, -- text within current buffer
@@ -313,8 +277,6 @@ return {
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
-                    elseif has_luasnip and in_snippet() and luasnip.jumpable(-1) then
-                        luasnip.jump(-1)
                     elseif in_leading_indent() then
                         smart_bs(true) -- true means to dedent
                     elseif in_whitespace() then
@@ -333,8 +295,6 @@ return {
                         else
                             cmp.select_next_item()
                         end
-                    elseif has_luasnip and luasnip.expand_or_locally_jumpable() then
-                        luasnip.expand_or_jump()
                     elseif in_whitespace() then
                         smart_tab()
                     else
@@ -352,7 +312,6 @@ return {
                     vim_item.menu = ({
                         buffer = "[Buffer]",
                         nvim_lsp = "[LSP]",
-                        luasnip = "[LuaSnip]",
                         nvim_lua = "[Lua]",
                         latex_symbols = "[LaTeX]",
                     })[entry.source.name]
