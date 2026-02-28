@@ -37,7 +37,19 @@ return {
         "refractalize/oil-git-status.nvim",
         dependencies = { "stevearc/oil.nvim", },
 
-        config = true,
+        config = function ()
+            require("oil-git-status").setup({
+                show_ignored = true,
+                symbols = {
+                    index = {
+                        ["!"] = "i"
+                    },
+                    working_tree = {
+                        ["!"] = "i"
+                    },
+                }
+            })
+        end,
     },
     {
         "JezerM/oil-lsp-diagnostics.nvim",

@@ -2,8 +2,9 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
+        -- "hrsh7th/cmp-nvim-lsp",
         { "antosha417/nvim-lsp-file-operations", config = true },
+        "saghen/blink.cmp",
     },
     config = function()
         -- NOTE: LSP Keybinds
@@ -51,8 +52,8 @@ return {
                 opts.desc = "查看当前选中项的定义"
                 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-                -- opts.desc = "Restart LSP"
-                -- vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+                opts.desc = "重启 LSP 服务器"
+                vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", opts)
 
                 -- vim.keymap.set("i", "<C-h>", function()
                 --     vim.lsp.buf.signature_help()
@@ -63,10 +64,10 @@ return {
         -- NOTE: Diagnostic Setup
         -- Define sign icons for each severity
         local signs = {
-            [vim.diagnostic.severity.ERROR] = " ",
-            [vim.diagnostic.severity.WARN] = " ",
-            [vim.diagnostic.severity.HINT] = "󰠠 ",
-            [vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.ERROR] = "x ",
+            [vim.diagnostic.severity.WARN] = "! ",
+            [vim.diagnostic.severity.HINT] = "* ",
+            [vim.diagnostic.severity.INFO] = "i ",
         }
 
         -- curosr hover hold
@@ -124,7 +125,7 @@ return {
         vim.keymap.set('n', '<leader>lx', function()
             virtual_text_enabled = not virtual_text_enabled
             update_diagnostic_config()
-        end, { desc = "Toggle LSP virtual text" })
+        end, { desc = "切换显示 LSP 诊断" })
 
         -- <leader>ll toggle between virtual text mode and precise hover mode
         vim.keymap.set('n', '<leader>ll', function()
@@ -150,9 +151,22 @@ return {
             end
         end, { desc = "Toggle LSP diagnostics virtual text or precise hover" })
 
+        vim.keymap.set('n', '<leader>lh', function ()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end, { desc = "切换显示类型推断提示" })
+
         -- NOTE: Setup servers
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
-        local capabilities = cmp_nvim_lsp.default_capabilities()
+        -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
+        -- local capabilities = cmp_nvim_lsp.default_capabilities()
+        local capabilities = {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true
+            }
+          }
+        }
+        capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
         -- Global LSP settings (applied to all servers)
         vim.lsp.config('*', {

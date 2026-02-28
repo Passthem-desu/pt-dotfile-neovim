@@ -20,7 +20,11 @@ vim.keymap.set("v", ">", ">gv", opts)
 
 -- 在粘贴时，不替换剪切板
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set("v", "p", '"_dhp', opts)
+vim.keymap.set("v", "p", '"_dP', opts)
+vim.keymap.set("v", "<C-c>", 'y', opts)
+vim.keymap.set("n", "<C-v>", 'p', opts)
+vim.keymap.set("v", "<C-v>", '"_dP', opts)
+vim.keymap.set("i", "<C-v>", '<C-r>+', opts)
 
 -- 在删除时，如果使用 <leader>d，则不会把删除内容放在剪切板
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
@@ -70,8 +74,8 @@ vim.keymap.set("n", "<leader>bt", "<cmd>tab split<CR>", { desc = "复制当前�
 vim.keymap.set("n", "]b", "<cmd>tabn<CR>")
 vim.keymap.set("n", "[b", "<cmd>tabp<CR>")
 
-vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "竖直分屏" })
-vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "水平分屏" })
+vim.keymap.set("n", "<leader>w%", "<C-w>v", { desc = "竖直分屏" })
+vim.keymap.set("n", "<leader>w\"", "<C-w>s", { desc = "水平分屏" })
 vim.keymap.set("n", "<leader>wd", "<cmd>close<CR>", { desc = "关闭当前分屏" })
 
 vim.keymap.set("n", "<C-_>", "<C-w>s<cmd>edit term://fish<CR>a", { desc = "打开一个控制台" })

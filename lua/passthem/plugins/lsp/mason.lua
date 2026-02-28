@@ -19,7 +19,7 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 -- lua
-                "lua-language-server",
+                "lua-ls",
 
                 -- python
                 "ruff",
