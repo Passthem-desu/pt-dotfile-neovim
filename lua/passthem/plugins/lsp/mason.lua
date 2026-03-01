@@ -19,7 +19,7 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 -- lua
-                "lua-ls",
+                "lua_ls",
 
                 -- python
                 "ruff",
@@ -38,6 +38,8 @@ return {
                 "svelte",
                 "tailwindcss",
                 "astro",
+                "eslint",
+                "eslint_d",
 
                 -- misc
                 "just",
