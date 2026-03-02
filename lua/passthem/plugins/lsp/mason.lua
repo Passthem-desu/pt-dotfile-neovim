@@ -39,7 +39,6 @@ return {
                 "tailwindcss",
                 "astro",
                 "eslint",
-                "eslint_d",
 
                 -- misc
                 "just",
@@ -51,6 +50,10 @@ return {
 
         mason_tool_installer.setup({
             ensure_installed = {
+                -- web
+                "eslint_d",
+                "prettier",
+                "prettierd",
             },
         })
     end,

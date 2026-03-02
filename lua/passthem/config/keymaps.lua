@@ -85,6 +85,13 @@ vim.keymap.set("n", "<C-_>", "<C-w>s<cmd>edit term://fish<CR>a", { desc = "打�
 ---> LSP 相关
 --->
 
-vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "格式化代码" })
+vim.keymap.set("n", "<leader>cf", function ()
+    require("conform").format({
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 500,
+    })
+end, { desc = "格式化代码" })
 vim.keymap.set("n", "<leader>cm", "<cmd>Mason<CR>", { desc = "打开 Mason" })
+
 
