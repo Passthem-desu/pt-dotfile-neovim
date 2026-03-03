@@ -42,13 +42,14 @@ return {
         -- 百炼大模型，我没有买 Coding 方案，好贵
         if apikeys.bailian then
             adapters.bailian = function()
-                return require("codecompanion.adapters").extend("openai_compatible", {
+                return require("codecompanion.adapters").extend("deepseek", {
                     env = {
                         api_key = function()
                             return apikeys.bailian
                         end,
                     },
                     name = "bailian",
+                    formatted_name = "千问",
                     url = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
                     schema = {
                         model = {
