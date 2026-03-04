@@ -21,18 +21,18 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- 在粘贴时，不替换剪切板
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("v", "p", '"_dP', opts)
-vim.keymap.set("v", "<C-c>", 'y', opts)
-vim.keymap.set("n", "<C-v>", 'p', opts)
+vim.keymap.set("v", "<C-c>", "y", opts)
+vim.keymap.set("n", "<C-v>", "p", opts)
 vim.keymap.set("v", "<C-v>", '"_dP', opts)
-vim.keymap.set("i", "<C-v>", '<C-r>+', opts)
+vim.keymap.set("i", "<C-v>", "<C-r>+", opts)
 
 -- 在删除时，如果使用 <leader>d，则不会把删除内容放在剪切板
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- 用 Esc 清空搜索内容
 vim.keymap.set("n", "<Esc>", ":nohl<CR>", {
-    desc = "清空搜索内容",
-    silent = true,
+	desc = "清空搜索内容",
+	silent = true,
 })
 
 -- 禁用 Ex 模式
@@ -43,25 +43,21 @@ vim.keymap.set("n", "x", '"_x', opts)
 
 -- 高亮复制
 vim.api.nvim_create_autocmd(
-    "TextYankPost", -- 在复制文字时触发
-    {
-        desc = "在复制内容时高亮",
+	"TextYankPost", -- 在复制文字时触发
+	{
+		desc = "在复制内容时高亮",
 
-        -- 方便在 :autocmd 查看命令列表时知道它是干什么的
-        group = vim.api.nvim_create_augroup(
-            "kickstart-highlight-yank",
-            { clear = true }
-        ),
+		-- 方便在 :autocmd 查看命令列表时知道它是干什么的
+		group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 
-        callback = function()
-            vim.hl.on_yank({
-                higroup = 'IncSearch',
-                timeout = 200,
-            })
-        end,
-    }
+		callback = function()
+			vim.hl.on_yank({
+				higroup = "IncSearch",
+				timeout = 200,
+			})
+		end,
+	}
 )
-
 
 --->
 ---> 标签页与分屏
@@ -75,32 +71,38 @@ vim.keymap.set("n", "]b", "<cmd>tabn<CR>")
 vim.keymap.set("n", "[b", "<cmd>tabp<CR>")
 
 vim.keymap.set("n", "<leader>w%", "<C-w>v", { desc = "竖直分屏" })
-vim.keymap.set("n", "<leader>w\"", "<C-w>s", { desc = "水平分屏" })
+vim.keymap.set("n", '<leader>w"', "<C-w>s", { desc = "水平分屏" })
 vim.keymap.set("n", "<leader>wd", "<cmd>close<CR>", { desc = "关闭当前分屏" })
 
 vim.keymap.set("n", "<C-_>", "<C-w>s<cmd>edit term://fish<CR>a", { desc = "打开一个控制台" })
-
 
 --->
 ---> LSP 相关
 --->
 
 vim.keymap.set("n", "<leader>cf", function()
-    require("conform").format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 500,
-    })
+	require("conform").format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 500,
+	})
 end, { desc = "格式化代码" })
 vim.keymap.set("n", "<leader>cm", "<cmd>Mason<CR>", { desc = "打开 Mason" })
-
 
 --->
 ---> AI 相关
 --->
 
 vim.keymap.set("n", "<leader>ai", function()
-    require("codecompanion").toggle({
-        window_opts = { layout = "vertical", width = 0.4 }
-    })
+	require("codecompanion").toggle({
+		window_opts = { layout = "vertical", width = 0.4 },
+	})
 end, { desc = "切换 CodeCompanion 窗口" })
+
+--->
+---> 文件管理
+--->
+
+vim.keymap.set("n", "<leader>en", "<cmd>edit term://nu<CR>", { desc = "打开 Nushell" })
+vim.keymap.set("n", "<leader>ef", "<cmd>edit term://fish<CR>", { desc = "打开 Fish" })
+vim.keymap.set("n", "<leader>eb", "<cmd>edit term://bash<CR>", { desc = "打开 Bash" })
