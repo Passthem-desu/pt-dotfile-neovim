@@ -151,7 +151,7 @@ return {
             end
         end, { desc = "Toggle LSP diagnostics virtual text or precise hover" })
 
-        vim.keymap.set('n', '<leader>lh', function ()
+        vim.keymap.set('n', '<leader>lh', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end, { desc = "切换显示类型推断提示" })
 
@@ -159,12 +159,12 @@ return {
         -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
         -- local capabilities = cmp_nvim_lsp.default_capabilities()
         local capabilities = {
-          textDocument = {
-            foldingRange = {
-              dynamicRegistration = false,
-              lineFoldingOnly = true
+            textDocument = {
+                foldingRange = {
+                    dynamicRegistration = false,
+                    lineFoldingOnly = true
+                }
             }
-          }
         }
         capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
@@ -172,5 +172,15 @@ return {
         vim.lsp.config('*', {
             capabilities = capabilities,
         })
+
+        -- 为 Nushell 做支持
+        if vim.fn.executable('nu') == 1 then
+            vim.lsp.config('nu_lsp', {
+                cmd = { 'nu', '--lsp' },
+                filetypes = { 'nu' },
+                root_markers = { '.git' },
+            })
+            vim.lsp.enable('nu_lsp')
+        end
     end,
 }
