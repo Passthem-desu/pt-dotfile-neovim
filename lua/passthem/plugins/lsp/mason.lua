@@ -42,7 +42,7 @@ return {
 				"vtsls",
 
 				-- sql
-				"sqlls",
+				"sqls",
 
 				-- misc
 				"just",
