@@ -41,6 +41,9 @@ return {
 				"eslint",
 				"vtsls",
 
+				-- sql
+				"sqlls",
+
 				-- misc
 				"just",
 				"dockerls",
