@@ -41,6 +41,11 @@ return {
 				"eslint",
 				"vtsls",
 
+				-- typst
+				-- See https://myriad-dreamin.github.io/tinymist/frontend/neovim.html
+				-- It requires tinymist installed
+				"tinymist",
+
 				-- sql
 				"sqls",
 
