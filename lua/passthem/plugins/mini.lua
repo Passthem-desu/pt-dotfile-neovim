@@ -23,10 +23,10 @@ return {
                     MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
                     MiniFiles.reveal_cwd()
                 end,
-                { desc = "打开 MiniFiles 文件管理器" } )
+                { desc = "打开 MiniFiles 文件管理器" })
         end,
     },
-    {  -- 用于方便创建和删除括号包裹
+    { -- 用于方便创建和删除括号包裹
         "echasnovski/mini.surround",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
@@ -51,7 +51,7 @@ return {
             silent = false,
         },
     },
-    {  -- 提醒行末空格
+    { -- 提醒行末空格
         "echasnovski/mini.trailspace",
         event = { "BufReadPost", "BufNewFile" },
         config = function()
@@ -62,7 +62,7 @@ return {
             })
         end
     },
-    {  -- 把东西在单行和多行之间切换
+    { -- 把东西在单行和多行之间切换
         "echasnovski/mini.splitjoin",
         config = function()
             local mini_splitjoin = require("mini.splitjoin")
