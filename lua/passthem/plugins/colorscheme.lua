@@ -11,7 +11,7 @@ local THEME_ONEDARK = {
     config = function()
         require('onedark').setup {
             transparent = true,
-            style = 'light',
+            -- style = 'light',
         }
         require('onedark').load()
     end
