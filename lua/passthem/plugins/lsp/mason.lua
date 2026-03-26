@@ -40,6 +40,8 @@ return {
 				"astro",
 				"eslint",
 				"vtsls",
+				"emmet_ls",
+				"cssls",
 
 				-- typst
 				-- See https://myriad-dreamin.github.io/tinymist/frontend/neovim.html
