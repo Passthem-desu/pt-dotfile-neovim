@@ -95,8 +95,8 @@ vim.opt.cursorline = false
 --->
 
 vim.opt.backspace = { "start", "eol", "indent" }
-vim.opt.splitright = true  -- 向右分屏而非向左
-vim.opt.splitbelow = true  -- 向下分屏而非向上
+vim.opt.splitright = true -- 向右分屏而非向左
+vim.opt.splitbelow = true -- 向下分屏而非向上
 
 -- 当停止打字时，等待多久 (ms) 提交 CursorHold 时间并交换文件写入硬盘
 -- 这和很多 LSP 插件响应速度有关
@@ -109,3 +109,12 @@ vim.opt.isfname:append("@-@")
 vim.g.editorconfig = true
 
 
+--->
+---> 注册额外的语言
+--->
+
+vim.filetype.add({
+	extension = {
+		mdx = 'mdx'
+	}
+})

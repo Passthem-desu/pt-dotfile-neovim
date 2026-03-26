@@ -24,6 +24,9 @@ return {
                 },
                 additional_vim_regex_highlighting = false,
             })
+
+            -- 见：https://phelipetls.github.io/posts/mdx-syntax-highlight-treesitter-nvim/
+            vim.treesitter.language.register('markdown', 'mdx')
         end,
     },
 }

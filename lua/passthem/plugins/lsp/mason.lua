@@ -55,6 +55,7 @@ return {
 				"docker_compose_language_service",
 				"taplo", -- toml 支持
 				"yamlls", -- yaml 支持
+				"mdx_analyzer"
 			},
 		})
 
