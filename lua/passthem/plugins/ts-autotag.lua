@@ -9,8 +9,4 @@ return {
             },
         })
     end,
-    ft = {
-        "html", "javascript", "typescript", "javascriptreact",
-        "typescriptreact", "svelte", "vue", "xml", "astro"  -- 加上这个
-    },
 }
