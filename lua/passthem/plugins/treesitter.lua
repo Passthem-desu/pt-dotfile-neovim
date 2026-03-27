@@ -23,6 +23,7 @@ return {
                     },
                 },
                 additional_vim_regex_highlighting = false,
+                auto_install = true,
             })
 
             -- 见：https://phelipetls.github.io/posts/mdx-syntax-highlight-treesitter-nvim/
