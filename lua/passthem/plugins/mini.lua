@@ -30,7 +30,12 @@ return {
         "echasnovski/mini.surround",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
-            custom_surroundings = nil,
+            custom_surroundings = {
+                ['('] = { output = { left = '(', right = ')' } },
+                ['['] = { output = { left = '[', right = ']' } },
+                ['{'] = { output = { left = '{', right = '}' } },
+                ['<'] = { output = { left = '<', right = '>' } },
+            },
             highlight_duraation = 200,
             mappings = {
                 -- 使用 sa( 创建小括号包裹。其他符号类似
