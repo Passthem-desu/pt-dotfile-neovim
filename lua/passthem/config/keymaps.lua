@@ -73,11 +73,11 @@ vim.keymap.set("n", "<leader>bo", "<cmd>BufferlineCloseOthers", { desc = "关闭
 vim.keymap.set("n", "]t", "<cmd>tabn<CR>", { desc = "下一标签页" })
 vim.keymap.set("n", "[t", "<cmd>tabp<CR>", { desc = "上一标签页" })
 
-vim.keymap.set("n", "H", "<cmd>bprevious<CR>", { desc = "上一缓冲区" })
-vim.keymap.set("n", "L", "<cmd>bnext<CR>", { desc = "下一缓冲区" })
+vim.keymap.set("n", "H", "<cmd>BufferlineCyclePrev<CR>", { desc = "上一缓冲区" })
+vim.keymap.set("n", "L", "<cmd>BufferlineCycleNext<CR>", { desc = "下一缓冲区" })
 
-vim.keymap.set("n", "]b", "<cmd>bnext<CR>", { desc = "下一缓冲区" })
-vim.keymap.set("n", "[b", "<cmd>bprevious<CR>", { desc = "上一缓冲区" })
+vim.keymap.set("n", "[b", "<cmd>BufferlineCyclePrev<CR>", { desc = "上一缓冲区" })
+vim.keymap.set("n", "]b", "<cmd>BufferlineCycleNext<CR>", { desc = "下一缓冲区" })
 
 vim.keymap.set("n", "<leader>w%", "<C-w>v", { desc = "竖直分屏" })
 vim.keymap.set("n", '<leader>w"', "<C-w>s", { desc = "水平分屏" })
