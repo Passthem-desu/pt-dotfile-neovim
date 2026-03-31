@@ -1,4 +1,4 @@
-return {
+local code_companion_config = {
     "olimorris/codecompanion.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -79,4 +79,45 @@ return {
             },
         })
     end
+}
+
+local status, apikeys = pcall(require, "passthem.secrets.apikeys")
+if not status then
+    vim.notify("当前环境没有创建 apikeys.lua 文件", vim.log.levels.WARN)
+    apikeys = {}
+end
+
+local gp_nvim = {
+    "robitx/gp.nvim",
+    config = function()
+        local providers = {}
+        local agents = {}
+
+        if apikeys.bailian then
+            providers.bailian = {
+                endpoint = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+                secret = apikeys.bailian,
+            }
+            table.insert(agents, {
+                provider = "bailian",
+                name = "[Bailian] Qwen3.5 Plus",
+                chat = true,
+                command = true,
+                model = {
+                    model = "qwen3.5-plus",
+                    think = true,
+                },
+                system_prompt = require("gp.defaults").chat_system_prompt,
+            })
+        end
+
+        require("gp").setup({
+            providers = providers,
+            agents = agents,
+        })
+    end,
+}
+
+return {
+    code_companion_config,
 }
