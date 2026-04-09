@@ -119,3 +119,12 @@ end, { desc = "切换 CodeCompanion 窗口" })
 vim.keymap.set("n", "<leader>en", "<cmd>edit term://nu<CR>", { desc = "打开 Nushell" })
 vim.keymap.set("n", "<leader>ef", "<cmd>edit term://fish<CR>", { desc = "打开 Fish" })
 vim.keymap.set("n", "<leader>eb", "<cmd>edit term://bash<CR>", { desc = "打开 Bash" })
+
+--->
+---> 控制台内
+--->
+
+vim.keymap.set('t', '<C-h>', [[<C-\><C-n>:TmuxNavigateLeft<CR>]], opts)
+vim.keymap.set('t', '<C-j>', [[<C-\><C-n>:TmuxNavigateDown<CR>]], opts)
+vim.keymap.set('t', '<C-k>', [[<C-\><C-n>:TmuxNavigateUp<CR>]], opts)
+vim.keymap.set('t', '<C-l>', [[<C-\><C-n>:TmuxNavigateRight<CR>]], opts)
