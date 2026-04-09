@@ -1,6 +1,6 @@
 -- 可以使用 `:source %` 重载这个文件
 
--- vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 
 -- 见 `:help clipboard-osc52`
 vim.g.clipboard = 'osc52'
