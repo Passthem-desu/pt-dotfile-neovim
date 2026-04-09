@@ -1,6 +1,6 @@
 -- 可以使用 `:source %` 重载这个文件
 
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
 vim.g.clipboard = {
   name = 'OSC 52',
   copy = {
