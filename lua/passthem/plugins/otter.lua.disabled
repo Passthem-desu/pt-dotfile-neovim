@@ -1,3 +1,5 @@
+-- 用于给 Markdown 上语法提示用的
+
 return {
     'jmbuhr/otter.nvim',
     dependencies = {
