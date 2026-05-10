@@ -3,17 +3,18 @@
 vim.opt.clipboard = "unnamedplus"
 
 -- 见 `:help clipboard-osc52`
-vim.g.clipboard = {
-  name = 'OSC 52',
-  copy = {
-    ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-    ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-  },
-  -- paste = {
-  --   ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-  --   ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-  -- },
-}
+-- vim.g.clipboard = {
+--   name = 'OSC 52',
+--   copy = {
+--     ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+--     ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+--   },
+--   -- paste = {
+--   --   ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+--   --   ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+--   -- },
+-- }
+vim.g.clipboard = 'osc52'
 
 -- 支持鼠标操作
 vim.opt.mouse = "a"
