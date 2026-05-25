@@ -5,7 +5,7 @@ if vim.g.neovide then
     -- 唉这个只有 MacOS 才有！！
     vim.g.neovide_window_blurred = true
 
-    vim.o.guifont = "Maple Mono NF CN:h14"
+    vim.o.guifont = "Maple Mono NF CN:h12"
     vim.g.neovide_theme = 'dark'
 
     vim.g.neovide_refresh_rate = 180
