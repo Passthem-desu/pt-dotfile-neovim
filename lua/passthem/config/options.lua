@@ -1,20 +1,33 @@
 -- 可以使用 `:source %` 重载这个文件
 
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
+
+vim.g.clipboard = {
+    name = 'win32yank',
+    copy = {
+        ['+'] = 'win32yank.exe -i --crlf',
+        ['*'] = 'win32yank.exe -i --crlf',
+    },
+    paste = {
+        ['+'] = 'win32yank.exe -o --lf',
+        ['*'] = 'win32yank.exe -o --lf',
+    },
+    cache_enabled = 1,
+}
 
 -- 见 `:help clipboard-osc52`
-vim.g.clipboard = {
-    name = 'OSC 52',
-    -- 这里只同意复制，粘贴的话，使用系统自带的快捷键吧！
-    copy = {
-        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-    },
-    -- paste = {
-    --     ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-    --     ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-    -- },
-}
+-- vim.g.clipboard = {
+--     name = 'OSC 52',
+--     -- 这里只同意复制，粘贴的话，使用系统自带的快捷键吧！
+--     copy = {
+--         ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+--         ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+--     },
+--     -- paste = {
+--     --     ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+--     --     ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+--     -- },
+-- }
 -- vim.g.clipboard = 'osc52'
 
 -- 支持鼠标操作
