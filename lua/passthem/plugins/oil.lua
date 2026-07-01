@@ -7,7 +7,6 @@ return {
             require("oil").setup({
                 default_file_explorer = true, -- 设置成默认文件管理器
                 columns = {
-                    "icon",
                     "permissions",
                     "size",
                     "mtime",

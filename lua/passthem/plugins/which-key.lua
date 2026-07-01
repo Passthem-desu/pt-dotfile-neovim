@@ -8,9 +8,17 @@ return {
     config = function()
         local wk = require("which-key")
 
+        wk.setup({
+            icons = {
+                separator = ">",
+                rules = false,
+            },
+        })
+
         wk.add({ "<leader>p", group = "查找" })
         wk.add({ "<leader>w", group = "窗口" })
-        wk.add({ "<leader>b", group = "标签页" })
+        wk.add({ "<leader>b", group = "缓冲区" })
+        wk.add({ "<leader>t", group = "标签页" })
         wk.add({ "<leader>s", group = "mini.nvim" })
         wk.add({ "<leader>g", group = "git" })
         wk.add({ "<leader>v", group = "vim" })
