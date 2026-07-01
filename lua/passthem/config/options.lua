@@ -111,7 +111,7 @@ vim.opt.cmdheight = 0
 
 -- 在第 80 列显示一个墙，表示该行过长
 -- vim.opt.colorcolumn = "80"
-vim.opt.colorcolumn = ""
+vim.opt.colorcolumn = "80,100"
 
 -- 标注光标所在行
 vim.opt.cursorline = false
