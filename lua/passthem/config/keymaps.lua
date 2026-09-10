@@ -128,3 +128,15 @@ vim.keymap.set('t', '<C-h>', [[<C-\><C-n>:TmuxNavigateLeft<CR>]], opts)
 vim.keymap.set('t', '<C-j>', [[<C-\><C-n>:TmuxNavigateDown<CR>]], opts)
 vim.keymap.set('t', '<C-k>', [[<C-\><C-n>:TmuxNavigateUp<CR>]], opts)
 vim.keymap.set('t', '<C-l>', [[<C-\><C-n>:TmuxNavigateRight<CR>]], opts)
+
+--->
+---> Command 模式: Bash style
+--->
+
+vim.keymap.set('c', '<C-a>', '<Home>', { noremap = true, desc = '移动到行首' })
+vim.keymap.set('c', '<C-e>', '<End>', { noremap = true, desc = '移动到行尾' })
+vim.keymap.set('c', '<C-b>', '<Left>', { noremap = true, desc = '向左移动一个字符' })
+vim.keymap.set('c', '<C-f>', '<Right>', { noremap = true, desc = '向右移动一个字符' })
+vim.keymap.set('c', '<M-b>', '<S-Left>', { noremap = true, desc = '向左移动一个单词' })
+vim.keymap.set('c', '<M-f>', '<S-Right>', { noremap = true, desc = '向右移动一个单词' })
+
