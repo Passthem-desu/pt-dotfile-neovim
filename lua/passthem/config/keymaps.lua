@@ -67,21 +67,21 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "新建标签页" 
 vim.keymap.set("n", "<leader>td", "<cmd>tabclose<CR>", { desc = "关闭标签页" })
 vim.keymap.set("n", "<leader>tt", "<cmd>tab split<CR>", { desc = "复制当前标签页" })
 
-vim.keymap.set("n", "<leader>bd", function()
-    local old_buf = vim.api.nvim_get_current_buf()
-    vim.cmd("BufferLineCycleNext")
-    vim.api.nvim_buf_delete(old_buf, { force = false })
-end, { desc = "关闭当前缓冲区" })
-vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "关闭其他缓冲区" })
+-- vim.keymap.set("n", "<leader>bd", function()
+--     local old_buf = vim.api.nvim_get_current_buf()
+--     vim.cmd("BufferLineCycleNext")
+--     vim.api.nvim_buf_delete(old_buf, { force = false })
+-- end, { desc = "关闭当前缓冲区" })
+-- vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "关闭其他缓冲区" })
 
 vim.keymap.set("n", "]t", "<cmd>tabn<CR>", { desc = "下一标签页" })
 vim.keymap.set("n", "[t", "<cmd>tabp<CR>", { desc = "上一标签页" })
 
-vim.keymap.set("n", "H", "<cmd>BufferLineCyclePrev<CR>", { desc = "上一缓冲区" })
-vim.keymap.set("n", "L", "<cmd>BufferLineCycleNext<CR>", { desc = "下一缓冲区" })
-
-vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "上一缓冲区" })
-vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "下一缓冲区" })
+-- vim.keymap.set("n", "H", "<cmd>BufferLineCyclePrev<CR>", { desc = "上一缓冲区" })
+-- vim.keymap.set("n", "L", "<cmd>BufferLineCycleNext<CR>", { desc = "下一缓冲区" })
+--
+-- vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "上一缓冲区" })
+-- vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "下一缓冲区" })
 
 vim.keymap.set("n", "<leader>w%", "<C-w>v", { desc = "竖直分屏" })
 vim.keymap.set("n", '<leader>w"', "<C-w>s", { desc = "水平分屏" })
