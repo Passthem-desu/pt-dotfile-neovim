@@ -14,6 +14,7 @@ return {
                 keymaps = {
                     ["<C-h>"] = false,
                     ["<C-c>"] = false, -- prevent from closing Oil as <C-c> is esc key
+                    ["<C-l>"] = false, -- 不要让 oil 搞得我没法切换窗口
                     ["<M-h>"] = "actions.select_split",
                     ["q"] = "actions.close",
                 },

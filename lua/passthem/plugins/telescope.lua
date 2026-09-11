@@ -15,5 +15,10 @@ return {
 
         vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = '查找 Buffers' })
         vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = '在所有文件搜索' })
+        vim.keymap.set('n', '<leader>pm', function ()
+            builtin.man_pages({
+                sections = { "ALL" }
+            })
+        end, { desc = '搜索 Manpage' })
     end
 }

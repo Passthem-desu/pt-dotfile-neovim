@@ -2,18 +2,23 @@
 
 -- vim.opt.clipboard = "unnamedplus"
 
-vim.g.clipboard = {
-    name = 'win32yank',
-    copy = {
-        ['+'] = 'win32yank.exe -i --crlf',
-        ['*'] = 'win32yank.exe -i --crlf',
-    },
-    paste = {
-        ['+'] = 'win32yank.exe -o --lf',
-        ['*'] = 'win32yank.exe -o --lf',
-    },
-    cache_enabled = 1,
-}
+if vim.fn.has("unix") == 1 then
+    vim.opt.shell = "/bin/bash"
+    if vim.fn.has("wsl") then
+        vim.g.clipboard = {
+            name = 'win32yank',
+            copy = {
+                ['+'] = 'win32yank.exe -i --crlf',
+                ['*'] = 'win32yank.exe -i --crlf',
+            },
+            paste = {
+                ['+'] = 'win32yank.exe -o --lf',
+                ['*'] = 'win32yank.exe -o --lf',
+            },
+            cache_enabled = 1,
+        }
+    end
+end
 
 -- 见 `:help clipboard-osc52`
 -- vim.g.clipboard = {
