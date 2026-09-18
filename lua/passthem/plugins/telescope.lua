@@ -8,13 +8,17 @@ return {
     },
     config = function ()
         require('telescope').setup {
-            defaults = {}
+            defaults = {
+                initial_mode = "normal",
+            },
+            pickers = {},
         }
 
         local builtin = require('telescope.builtin')
 
         vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = '查找 Buffers' })
         vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = '在所有文件搜索' })
+        vim.keymap.set('n', '<leader>ph', builtin.help_tags, { desc = 'NeoVim 帮助' })
         vim.keymap.set('n', '<leader>pm', function ()
             builtin.man_pages({
                 sections = { "ALL" }
