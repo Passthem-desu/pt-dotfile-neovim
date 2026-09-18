@@ -2,9 +2,9 @@ return {
     {
         'saghen/blink.cmp',
         dependencies = {
-            -- 可能我不太喜欢这种 snippets 吧，感觉很干扰
-            -- 'rafamadriz/friendly-snippets'
+            'rafamadriz/friendly-snippets'
         },
+        event = "InsertEnter",
 
         -- 唉还要我去手动 checkout 到那个版本，有点烦
         version = 'v1.9.1',
@@ -44,7 +44,7 @@ return {
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'lsp', 'path', 'buffer' },
+                default = { 'lsp', 'path', 'buffer', 'snippets' },
             },
 
             -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

@@ -108,6 +108,10 @@ local code_companion_config = {
     end
 }
 
-return {
-    code_companion_config,
-}
+if false then
+    return {
+        code_companion_config,
+    }
+else
+    return {}
+end
