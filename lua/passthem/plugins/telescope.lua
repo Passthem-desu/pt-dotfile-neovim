@@ -24,5 +24,6 @@ return {
                 sections = { "ALL" }
             })
         end, { desc = '搜索 Manpage' })
+        vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'git status' })
     end
 }
