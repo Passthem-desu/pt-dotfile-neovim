@@ -2,30 +2,6 @@ return {
     {
         "echasnovski/mini.nvim",
     },
-    {
-        "echasnovski/mini.files",
-        config = function()
-            local MiniFiles = require("mini.files")
-            MiniFiles.setup({
-                mappings = {
-                    close = "<Esc>",
-                    go_in = "l",
-                    go_out = "h",
-                    go_in_plus = "<CR>",
-                    go_out_plus = "-",
-                },
-                options = {
-                    use_as_default_explorer = false,
-                },
-            })
-            vim.keymap.set(
-                "n", "<leader>ee", function()
-                    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-                    MiniFiles.reveal_cwd()
-                end,
-                { desc = "打开 MiniFiles 文件管理器" })
-        end,
-    },
     { -- 用于方便创建和删除括号包裹
         "echasnovski/mini.surround",
         event = { "BufReadPre", "BufNewFile" },
@@ -41,14 +17,14 @@ return {
                 -- 使用 sa( 创建小括号包裹。其他符号类似
                 add = 'sa',
                 delete = 'sd',
-                find = 'sf',           -- Find surrounding (to the right)
-                find_left = 'sF',      -- Find surrounding (to the left)
-                highlight = 'sh',      -- Highlight surrounding
+                -- find = 'sf',           -- Find surrounding (to the right)
+                -- find_left = 'sF',      -- Find surrounding (to the left)
+                -- highlight = 'sh',      -- Highlight surrounding
                 replace = 'sr',        -- Replace surrounding
-                update_n_lines = 'sn', -- Update `n_lines`
+                -- update_n_lines = 'sn', -- Update `n_lines`
 
-                suffix_last = 'l',     -- Suffix to search with "prev" method
-                suffix_next = 'n',     -- Suffix to search with "next" method
+                -- suffix_last = 'l',     -- Suffix to search with "prev" method
+                -- suffix_next = 'n',     -- Suffix to search with "next" method
             },
             n_lines = 20,
             respect_selection_type = false,

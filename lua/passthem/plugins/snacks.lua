@@ -21,13 +21,6 @@ return {
         },
 
         keys = {
-            { -- Lazygit
-                "<leader>gg",
-                function()
-                    require("snacks").lazygit()
-                end,
-                desc = "打开 LazyGit 窗口",
-            },
             { -- Git Branch
                 "<leader>gb",
                 function()
@@ -50,26 +43,6 @@ return {
                     require("snacks").picker.keymaps({ layout = "ivy" })
                 end,
                 desc = "查看键位配置",
-            },
-            {
-                "<leader>vh",
-                function()
-                    require("snacks").picker.help()
-                end,
-                desc = "查看 NeoVim 文档",
-            },
-        },
-    },
-    {
-        "folke/todo-comments.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        keys = {
-            { -- 查询代办
-                "<leader>pt",
-                function()
-                    require("snacks").picker.todo_comments()
-                end,
-                desc = "查找代办",
             },
         },
     },

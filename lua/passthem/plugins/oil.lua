@@ -15,7 +15,6 @@ return {
                     ["<C-h>"] = false,
                     ["<C-c>"] = false, -- prevent from closing Oil as <C-c> is esc key
                     ["<C-l>"] = false, -- 不要让 oil 搞得我没法切换窗口
-                    ["<M-h>"] = "actions.select_split",
                     ["q"] = "actions.close",
                 },
                 delete_to_trash = false,
@@ -29,7 +28,7 @@ return {
             })
 
             -- opens parent dir over current active window
-            vim.keymap.set("n", "<leader>eo", "<CMD>Oil<CR>", { desc = "打开 Oil 文件管理器" })
+            -- vim.keymap.set("n", "<leader>eo", "<CMD>Oil<CR>", { desc = "打开 Oil 文件管理器" })
             vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "打开 Oil 文件管理器" })
         end,
     },
