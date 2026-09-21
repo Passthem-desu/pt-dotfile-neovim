@@ -19,15 +19,7 @@ vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
 -- 在粘贴时，不替换剪切板
--- vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set("v", "p", '"_dP', opts)
--- vim.keymap.set("v", "<C-c>", "y", opts)
--- vim.keymap.set("n", "<C-v>", "p", opts)
--- vim.keymap.set("v", "<C-v>", '"_dP', opts)
--- vim.keymap.set("i", "<C-v>", "<C-r>+", opts)
-
--- 在删除时，如果使用 <leader>d，则不会把删除内容放在剪切板
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- 用 Esc 清空搜索内容
 vim.keymap.set("n", "<Esc>", ":nohl<CR>", {
@@ -60,36 +52,6 @@ vim.api.nvim_create_autocmd(
 )
 
 --->
----> 标签页与分屏
---->
-
-vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<CR>", { desc = "新建标签页" })
-vim.keymap.set("n", "<leader>td", "<cmd>tabclose<CR>", { desc = "关闭标签页" })
-vim.keymap.set("n", "<leader>tt", "<cmd>tab split<CR>", { desc = "复制当前标签页" })
-
--- vim.keymap.set("n", "<leader>bd", function()
---     local old_buf = vim.api.nvim_get_current_buf()
---     vim.cmd("BufferLineCycleNext")
---     vim.api.nvim_buf_delete(old_buf, { force = false })
--- end, { desc = "关闭当前缓冲区" })
--- vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "关闭其他缓冲区" })
-
-vim.keymap.set("n", "]t", "<cmd>tabn<CR>", { desc = "下一标签页" })
-vim.keymap.set("n", "[t", "<cmd>tabp<CR>", { desc = "上一标签页" })
-
--- vim.keymap.set("n", "H", "<cmd>BufferLineCyclePrev<CR>", { desc = "上一缓冲区" })
--- vim.keymap.set("n", "L", "<cmd>BufferLineCycleNext<CR>", { desc = "下一缓冲区" })
---
--- vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "上一缓冲区" })
--- vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "下一缓冲区" })
-
-vim.keymap.set("n", "<leader>w%", "<C-w>v", { desc = "竖直分屏" })
-vim.keymap.set("n", '<leader>w"', "<C-w>s", { desc = "水平分屏" })
-vim.keymap.set("n", "<leader>wd", "<cmd>close<CR>", { desc = "关闭当前分屏" })
-
-vim.keymap.set("n", "<C-_>", "<C-w>s<cmd>edit term://fish<CR>a", { desc = "打开一个控制台" })
-
---->
 ---> LSP 相关
 --->
 
@@ -102,15 +64,6 @@ vim.keymap.set("n", "<leader>cf", function()
 end, { desc = "格式化代码" })
 vim.keymap.set("n", "<leader>cm", "<cmd>Mason<CR>", { desc = "打开 Mason" })
 
---->
----> AI 相关
---->
-
-vim.keymap.set("n", "<leader>ai", function()
-    require("codecompanion").toggle({
-        window_opts = { layout = "vertical", width = 0.4 },
-    })
-end, { desc = "切换 CodeCompanion 窗口" })
 
 --->
 ---> 文件管理
