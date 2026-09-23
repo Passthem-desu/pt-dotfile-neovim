@@ -183,7 +183,6 @@ return {
         vim.lsp.config('godot', {
             name = 'Godot',
             cmd = { 'nc', '127.0.0.1', '6005' },
-            filetypes = { 'gd', 'gdshader' },
             root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
             capabilities = capabilities,
         })
