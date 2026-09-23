@@ -179,6 +179,14 @@ return {
 			capabilities = capabilities,
 		})
 
+        -- 为 GDScript 做支持
+        vim.lsp.config('godot', {
+            name = 'Godot',
+            cmd = { 'nc', '127.0.0.1', '6005' },
+            root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
+            capabilities = capabilities,
+        })
+
 		-- 为 Nushell 做支持
 		if vim.fn.executable("nu") == 1 then
 			vim.lsp.config("nu_lsp", {
