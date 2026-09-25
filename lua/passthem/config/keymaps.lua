@@ -93,3 +93,9 @@ vim.keymap.set('c', '<C-f>', '<Right>', { noremap = true, desc = '向右移动�
 vim.keymap.set('c', '<M-b>', '<S-Left>', { noremap = true, desc = '向左移动一个单词' })
 vim.keymap.set('c', '<M-f>', '<S-Right>', { noremap = true, desc = '向右移动一个单词' })
 
+--->
+---> 插件相关
+--->
+
+vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true, desc = 'EasyAlign' })
+vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true, desc = 'EasyAlign' })
