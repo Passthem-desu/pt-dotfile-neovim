@@ -25,5 +25,8 @@ return {
             })
         end, { desc = '搜索 Manpage' })
         vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'git status' })
+        vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'git branch' })
+        vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '查找文件' })
+        vim.keymap.set('n', '<leader>pk', builtin.keymaps, { desc = '查找键位' })
     end
 }
