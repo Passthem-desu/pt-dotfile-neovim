@@ -1,33 +1,27 @@
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        -- INFO: nvim-treesitter 插件正在迎来大变
-        branch = 'master',
-        event = { "BufReadPre", "BufNewFile" },
-        build = ":TSUpdate",
-        config = function()
-            local treesitter = require("nvim-treesitter.configs")
-            treesitter.setup({
-                highlight = {
-                    enable = true,
-                },
-                indent = {
-                    enable = true,
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<C-space>",
-                        node_incremental = "<C-space>",
-                        scope_incremental = false,
-                    },
-                },
-                additional_vim_regex_highlighting = false,
-                auto_install = true,
-            })
-
-            -- 见：https://phelipetls.github.io/posts/mdx-syntax-highlight-treesitter-nvim/
-            vim.treesitter.language.register('markdown', 'mdx')
-        end,
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    build = ":TSUpdate",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      ensure_installed = {
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "markdown",
+        "markdown_inline",
+        "typst",
+      },
+      auto_install = true,
     },
+    config = function(_, opts)
+      require("nvim-treesitter").setup(opts)
+
+      -- 配置缩进使用 treesitter 的
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      vim.treesitter.language.register("markdown", "mdx")
+    end,
+  },
 }

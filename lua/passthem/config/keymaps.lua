@@ -18,6 +18,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
+-- 选区范围调整
+vim.keymap.set("n", "<C-space>", "van", { remap = true, desc = "选择当前组件" })
+vim.keymap.set("x", "<C-space>", "an", { remap = true, desc = "扩大选区" })
+vim.keymap.set("x", "<BS>", "in", { remap = true, desc = "缩小选区" })
+
 -- 在粘贴时，不替换剪切板
 vim.keymap.set("v", "p", '"_dP', opts)
 
