@@ -1,6 +1,6 @@
 return {
     { -- 用于方便创建和删除括号包裹
-        "echasnovski/mini.surround",
+        "nvim-mini/mini.surround",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
             custom_surroundings = {
@@ -9,7 +9,7 @@ return {
                 ['{'] = { output = { left = '{', right = '}' } },
                 ['<'] = { output = { left = '<', right = '>' } },
             },
-            highlight_duraation = 200,
+            highlight_duration = 200,
             mappings = {
                 -- 使用 sa( 创建小括号包裹。其他符号类似
                 add = 'sa',
@@ -17,7 +17,7 @@ return {
                 -- find = 'sf',           -- Find surrounding (to the right)
                 -- find_left = 'sF',      -- Find surrounding (to the left)
                 -- highlight = 'sh',      -- Highlight surrounding
-                replace = 'sr',        -- Replace surrounding
+                replace = 'sr', -- Replace surrounding
                 -- update_n_lines = 'sn', -- Update `n_lines`
 
                 -- suffix_last = 'l',     -- Suffix to search with "prev" method
@@ -30,18 +30,18 @@ return {
         },
     },
     { -- 提醒行末空格
-        "echasnovski/mini.trailspace",
+        "nvim-mini/mini.trailspace",
         event = { "BufReadPost", "BufNewFile" },
         config = function()
             local mini_trailspace = require("mini.trailspace")
 
             mini_trailspace.setup({
-                only_in_normal_bufers = true,
+                only_in_normal_buffers = true,
             })
         end
     },
     { -- 把东西在单行和多行之间切换
-        "echasnovski/mini.splitjoin",
+        "nvim-mini/mini.splitjoin",
         config = function()
             local mini_splitjoin = require("mini.splitjoin")
 
@@ -62,6 +62,18 @@ return {
                 function() mini_splitjoin.split() end,
                 { desc = "展开多行" }
             )
+        end
+    },
+    {
+        "nvim-mini/mini.cursorword",
+        config = function()
+            require('mini.cursorword').setup()
+        end
+    },
+    {
+        "nvim-mini/mini.align",
+        config = function()
+            require('mini.align').setup()
         end
     },
 }

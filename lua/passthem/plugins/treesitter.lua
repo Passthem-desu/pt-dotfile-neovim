@@ -13,6 +13,8 @@ return {
                 "markdown",
                 "markdown_inline",
                 "typst",
+                "latex",
+                "yaml",
             },
             auto_install = true,
         },
@@ -30,4 +32,7 @@ return {
             })
         end,
     },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+    }
 }

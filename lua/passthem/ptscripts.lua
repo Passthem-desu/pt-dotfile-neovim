@@ -1,13 +1,13 @@
 local pt_scripts_group = vim.api.nvim_create_augroup("PassthemScriptsGroup", {
-    clear=true,
+    clear = true,
 })
 
 -- 在 Markdown 中，允许使用 <C-CR> 切换任务状态
 vim.api.nvim_create_autocmd("FileType", {
     group = pt_scripts_group,
     pattern = "markdown",
-    callback = function ()
-        vim.keymap.set("n", "<C-CR>", function ()
+    callback = function()
+        vim.keymap.set("n", "<C-CR>", function()
             local line = vim.api.nvim_get_current_line()
 
             local indent, symbol, rest = line:match("^(%s*)- %[(.)%] (.*)")

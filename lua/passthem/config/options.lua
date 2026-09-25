@@ -112,7 +112,7 @@ vim.opt.splitbelow = true -- 向下分屏而非向上
 
 -- 当停止打字时，等待多久 (ms) 提交 CursorHold 时间并交换文件写入硬盘
 -- 这和很多 LSP 插件响应速度有关
-vim.opt.updatetime = 50
+vim.opt.updatetime = 200
 
 -- 将 @ 符号考虑到「合法文件名」内。这在一些 NodeJS 包裹中有用
 vim.opt.isfname:append("@-@")

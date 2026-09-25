@@ -62,9 +62,9 @@ vim.api.nvim_create_autocmd(
 
 vim.keymap.set("n", "<leader>cf", function()
     require("conform").format({
-        lsp_fallback = true,
         async = false,
         timeout_ms = 500,
+        lsp_format = "fallback",
     })
 end, { desc = "格式化代码" })
 vim.keymap.set("n", "<leader>cm", "<cmd>Mason<CR>", { desc = "打开 Mason" })
@@ -97,10 +97,3 @@ vim.keymap.set('c', '<C-b>', '<Left>', { noremap = true, desc = '向左移动一
 vim.keymap.set('c', '<C-f>', '<Right>', { noremap = true, desc = '向右移动一个字符' })
 vim.keymap.set('c', '<M-b>', '<S-Left>', { noremap = true, desc = '向左移动一个单词' })
 vim.keymap.set('c', '<M-f>', '<S-Right>', { noremap = true, desc = '向右移动一个单词' })
-
---->
----> 插件相关
---->
-
-vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)', { remap = true, desc = 'EasyAlign' })
-vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)', { remap = true, desc = 'EasyAlign' })

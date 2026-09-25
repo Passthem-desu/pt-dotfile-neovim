@@ -33,9 +33,11 @@ return {
             ["markdown.mdx"] = prettier,
             graphql = prettier,
         },
+        default_format_opts = {
+            lsp_format = "fallback",
+        },
         format_on_save = {
             timeout_ms = 500,
-            lsp_fallback = false, -- 强制不使用 LSP，只信赖 Prettier
         },
     },
 }
