@@ -1,7 +1,4 @@
 return {
-    {
-        "echasnovski/mini.nvim",
-    },
     { -- 用于方便创建和删除括号包裹
         "echasnovski/mini.surround",
         event = { "BufReadPre", "BufNewFile" },

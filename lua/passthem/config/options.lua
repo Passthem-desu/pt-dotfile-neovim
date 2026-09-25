@@ -52,9 +52,6 @@ vim.opt.backup = false
 -- 当重启 Vim 时，可以重做之前的东西
 vim.opt.undofile = true
 
--- 禁用自带的文件管理器的头部 banner
-vim.cmd("let g:netrw_banner = 0")
-
 
 --->
 ---> Vim 搜索设置
@@ -119,9 +116,6 @@ vim.opt.updatetime = 50
 
 -- 将 @ 符号考虑到「合法文件名」内。这在一些 NodeJS 包裹中有用
 vim.opt.isfname:append("@-@")
-
--- 如果项目中包含 .editorconfig，则让 vim 遵守它
-vim.g.editorconfig = true
 
 
 --->
