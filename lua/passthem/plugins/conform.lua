@@ -36,8 +36,7 @@ return {
         default_format_opts = {
             lsp_format = "fallback",
         },
-        format_on_save = {
-            timeout_ms = 500,
-        },
+        -- 保存时不自动格式化；需要格式化用 <leader>cf
+        format_on_save = false,
     },
 }
