@@ -28,5 +28,7 @@ return {
         vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'git branch' })
         vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '查找文件' })
         vim.keymap.set('n', '<leader>pk', builtin.keymaps, { desc = '查找键位' })
+        vim.keymap.set('n', '<leader>pd', builtin.diagnostics, { desc = '查找工作区代码诊断' })
+        vim.keymap.set('n', '<leader>pt', builtin.filetypes, { desc = '设置文件类型' })
     end
 }
