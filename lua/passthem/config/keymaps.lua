@@ -23,9 +23,6 @@ vim.keymap.set("n", "<C-space>", "van", { remap = true, desc = "选择当前组�
 vim.keymap.set("x", "<C-space>", "an", { remap = true, desc = "扩大选区" })
 vim.keymap.set("x", "<BS>", "in", { remap = true, desc = "缩小选区" })
 
--- 在粘贴时，不替换剪切板
-vim.keymap.set("v", "p", '"_dP', opts)
-
 -- 用 Esc 清空搜索内容
 vim.keymap.set("n", "<Esc>", ":nohl<CR>", {
     desc = "清空搜索内容",
@@ -34,9 +31,6 @@ vim.keymap.set("n", "<Esc>", ":nohl<CR>", {
 
 -- 禁用 Ex 模式
 vim.keymap.set("n", "Q", "<nop>")
-
--- 用 x 删除内容不复制
-vim.keymap.set("n", "x", '"_x', opts)
 
 -- 高亮复制
 vim.api.nvim_create_autocmd(
