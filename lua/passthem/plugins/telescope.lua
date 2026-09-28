@@ -7,11 +7,23 @@ return {
         "andrew-george/telescope-themes",
     },
     config = function ()
+        local actions = require("telescope.actions")
+
         require('telescope').setup {
             defaults = {
                 -- initial_mode = "normal",
             },
-            pickers = {},
+            pickers = {
+                buffers = {
+                    sort_mru = true,
+                    ignore_current_buffer = true,
+                    mappings = {
+                        i = {
+                            ["<C-d>"] = actions.delete_buffer,
+                        }
+                    }
+                },
+            },
         }
 
         local builtin = require('telescope.builtin')
