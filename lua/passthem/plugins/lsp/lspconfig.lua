@@ -187,6 +187,15 @@ return {
             vim.lsp.enable("nu_lsp")
         end
 
+        -- 如果安装了 nixd
+        -- 安装方法 nix profile add github:nixos/nixpkgs#nixd
+        if vim.fn.executable("nixd") == 1 then
+            vim.lsp.enable('nixd')
+            if vim.fn.executable("nixfmt") ~= 1 then
+                vim.notify("注意：nixfmt 不在环境中", vim.log.levels.WARN)
+            end
+        end
+
         vim.lsp.config("tinymist", {
             formatterMode = "typstyle",
             exportPDF = "onType",
