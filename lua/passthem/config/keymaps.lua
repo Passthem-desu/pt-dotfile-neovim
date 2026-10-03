@@ -32,6 +32,9 @@ vim.keymap.set("n", "<Esc>", ":nohl<CR>", {
 -- 禁用 Ex 模式
 vim.keymap.set("n", "Q", "<nop>")
 
+-- 用 Zellij 的时候养成的手癖，会在 Oil 里触发不太想要的东西，所以只能先禁用了
+vim.keymap.set("n", "<C-t>", "<nop>")
+
 -- 高亮复制
 vim.api.nvim_create_autocmd(
     "TextYankPost", -- 在复制文字时触发
