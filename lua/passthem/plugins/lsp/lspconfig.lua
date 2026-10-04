@@ -21,34 +21,26 @@ return {
                 opts.desc = "查看定义"
                 vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
 
-                opts.desc = "查看声明"
-                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-                opts.desc = "查看可用的代码操作"
-                vim.keymap.set({ "n", "v" }, "<leader>ca", function()
-                    vim.lsp.buf.code_action()
-                end, opts)
-
-                opts.desc = "重命名变量"
-                vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
-
                 opts.desc = "查看当前文件的代码诊断"
                 vim.keymap.set("n", "<leader>cD", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
 
+                opts.desc = "查看可用的代码操作"
+                vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+
+                opts.desc = "查看声明"
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+
+                opts.desc = "查看引用"
+                vim.keymap.set("n", "<leader>cr", "<cmd>Telescope lsp_references<CR>", opts)
+
+                opts.desc = "重命名变量"
+                vim.keymap.set("n", "<leader>cn", vim.lsp.buf.rename, opts)
+
+                opts.desc = "重命名变量"
+                vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
+
                 opts.desc = "查看当前行代码诊断"
-                vim.keymap.set("n", "<leader>cd", function()
-                    vim.diagnostic.open_float({ focusable = true })
-                end, opts)
-
-                opts.desc = "查看当前选中项的定义"
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-                opts.desc = "重启 LSP 服务器"
-                vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", opts)
-
-                -- vim.keymap.set("i", "<C-h>", function()
-                --     vim.lsp.buf.signature_help()
-                -- end, opts)
+                vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, opts)
             end,
         })
 
@@ -101,7 +93,7 @@ return {
                 float = {
                     focusable = false,
                     style = "minimal",
-                    border = "rounded",
+                    border = "solid",
                     source = true,
                 },
             })
@@ -145,7 +137,7 @@ return {
                     end,
                 })
             end
-        end, { desc = "Toggle LSP diagnostics virtual text or precise hover" })
+        end, { desc = "切换显示错误信息" })
 
         vim.keymap.set("n", "<leader>lh", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())

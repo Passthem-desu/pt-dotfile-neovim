@@ -42,5 +42,7 @@ return {
         vim.keymap.set('n', '<leader>pk', builtin.keymaps, { desc = '查找键位' })
         vim.keymap.set('n', '<leader>pd', builtin.diagnostics, { desc = '查找工作区代码诊断' })
         vim.keymap.set('n', '<leader>pt', builtin.filetypes, { desc = '设置文件类型' })
+        vim.keymap.set('n', '<leader>pq', builtin.quickfix, { desc = 'Quickfix' })
+        vim.keymap.set('n', '<leader>pl', builtin.loclist, { desc = 'Location List' })
     end
 }
