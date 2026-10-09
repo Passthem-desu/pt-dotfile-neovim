@@ -65,6 +65,11 @@ vim.opt.backup = false
 -- 当重启 Vim 时，可以重做之前的东西
 vim.opt.undofile = true
 
+-- 不跨 session 保存 jumplist / changelist / 小写本地 mark
+-- 保证每次打开 Neovim 时 <C-o> <C-i> 都是空的。
+-- 注意：'0 表示不存，必须非空且包含 ' 项
+vim.opt.shada = "!,'0,<50,s10,h,r/tmp/,r/private/"
+
 
 --->
 ---> Vim 搜索设置
