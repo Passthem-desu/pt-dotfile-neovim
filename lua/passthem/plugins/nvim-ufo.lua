@@ -44,19 +44,5 @@ return {
 
         -- 使用 ufo 的设置
         require('ufo').setup(opts)
-
-        -- 快捷键设置
-        vim.keymap.set(
-            'n',
-            'zR',
-            require('ufo').openAllFolds,
-            { desc = "打开所有折叠" }
-        )
-        vim.keymap.set(
-            'n',
-            'zM',
-            require('ufo').closeAllFolds,
-            { desc = "关闭所有折叠" }
-        )
     end,
 }
