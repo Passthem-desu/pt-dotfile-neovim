@@ -54,6 +54,12 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 
+-- 去掉 formatoptions 的 t：不要按 textwidth 在插入模式里自动插硬换行。
+-- 否则 editorconfig 的 max_line_length 会通过 textwidth 生效，在长行（尤其是
+-- 含空格的长字符串路径）里塞入换行符，导致语法错误。
+-- 手动格式化不受影响：<leader>cf（conform）和 gq（依赖 q 标志）照常可用。
+vim.opt.formatoptions:remove("t")
+
 
 --->
 ---> 文件管理
