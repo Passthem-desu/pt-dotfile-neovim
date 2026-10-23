@@ -1,3 +1,119 @@
+local function setup_local_lsp()
+    -- GDScript
+    vim.lsp.config('godot', {
+        name = 'Godot',
+        cmd = { 'nc', '127.0.0.1', '6005' },
+        root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
+    })
+
+    -- Nushell
+    if vim.fn.executable("nu") == 1 then
+        vim.lsp.config("nu_lsp", {
+            cmd = { "nu", "--lsp" },
+            filetypes = { "nu" },
+            root_markers = { ".git" },
+        })
+        vim.lsp.enable("nu_lsp")
+    end
+
+    -- nix
+    if vim.fn.executable("nixd") == 1 then
+        vim.lsp.enable('nixd')
+        if vim.fn.executable("nixfmt") ~= 1 then
+            vim.notify("注意：nixfmt 不在环境中", vim.log.levels.WARN)
+        end
+    end
+
+    -- Golang
+    if vim.fn.executable("gopls") == 1 then
+        vim.lsp.enable('gopls')
+    end
+
+    -- Typescript
+    if vim.fn.executable("typescript-language-server") == 1 then
+        vim.lsp.enable('ts_ls')
+    end
+
+    -- Python
+    if vim.fn.executable("ruff") == 1 then
+        vim.lsp.enable('ruff')
+    end
+    if vim.fn.executable("basedpyright") == 1 then
+        vim.lsp.enable('basedpyright')
+    end
+
+    -- Rust
+    if vim.fn.executable('rust-analyzer') == 1 then
+        vim.lsp.config('rust_analyzer', {
+            settings = {
+                ['rust-analyzer'] = {
+                    check = {
+                        command = "clippy",
+                    },
+                },
+            },
+        })
+        vim.lsp.enable('rust_analyzer')
+    end
+
+    -- Clangd
+    if vim.fn.executable('clangd') == 1 then
+        vim.lsp.enable('clangd')
+    end
+
+    -- Justfile
+    if vim.fn.executable('just-lsp') == 1 then
+        vim.lsp.enable('just')
+    end
+
+    -- Typst
+    if vim.fn.executable('tinymist') == 1 then
+        vim.lsp.enable('tinymist')
+    end
+end
+
+local function configure_lsp()
+    -- 获取默认的 LSP 能力
+    local capabilities = require("blink.cmp").get_lsp_capabilities({
+        textDocument = {
+            foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            },
+        },
+    })
+
+    -- Global LSP settings (applied to all servers)
+    vim.lsp.config("*", {
+        capabilities = capabilities,
+    })
+
+    vim.lsp.config("tinymist", {
+        formatterMode = "typstyle",
+        exportPDF = "onType",
+        semanticTokens = "disable",
+    })
+
+    vim.lsp.config('vtsls', {
+        filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'vue' },
+        settings = {
+            vtsls = {
+                tsserver = {
+                    globalPlugins = {
+                        {
+                            name = "@vue/typescript-plugin",
+                            location = vim.fn.stdpath("data")
+                                .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+                            languages = { "vue" },
+                            configNamespace = "typescript",
+                        },
+                    },
+                },
+            },
+        },
+    })
+end
+
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -13,10 +129,6 @@ return {
             callback = function(ev)
                 -- Buffer local mappings
                 local opts = { buffer = ev.buf, silent = true }
-
-                -- Keymaps
-                -- opts.desc = "查看 LSP 引用"
-                -- vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
                 opts.desc = "查看定义"
                 vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
@@ -36,202 +148,37 @@ return {
                 opts.desc = "重命名变量"
                 vim.keymap.set("n", "<leader>cn", vim.lsp.buf.rename, opts)
 
-                opts.desc = "重命名变量"
-                vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
-
                 opts.desc = "查看当前行代码诊断"
                 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, opts)
             end,
         })
 
-        -- NOTE: Diagnostic Setup
-        -- Define sign icons for each severity
-        local signs = {
-            [vim.diagnostic.severity.ERROR] = "x ",
-            [vim.diagnostic.severity.WARN] = "! ",
-            [vim.diagnostic.severity.HINT] = "* ",
-            [vim.diagnostic.severity.INFO] = "i ",
-        }
-
-        -- curosr hover hold
-        local augroup = vim.api.nvim_create_augroup("LspDiagnosticsHold", { clear = true })
-        local virtual_text_enabled = true
-
-        -- helper functon check if cursor over diagnostic
-        local function cursor_over_diagnostic()
-            local bufnr = vim.api.nvim_get_current_buf()
-            local cursor_pos = vim.api.nvim_win_get_cursor(0)
-            local lnum = cursor_pos[1] - 1
-            local col = cursor_pos[2]
-            local diags = vim.diagnostic.get(bufnr, { lnum = lnum })
-            for _, diag in ipairs(diags) do
-                if diag.end_lnum == lnum and col >= diag.col and col < diag.end_col then
-                    return true
-                end
-            end
-            return false
-        end
-
-        -- helper check for any open float (to avoid overlaps with float doc)
-        local function has_floating_win()
-            for _, winid in ipairs(vim.api.nvim_list_wins()) do
-                local cfg = vim.api.nvim_win_get_config(winid)
-                if cfg.relative ~= "" then
-                    return true
-                end
-            end
-            return false
-        end
-
         -- update diagnostic config function
-        local function update_diagnostic_config()
-            vim.diagnostic.config({
-                signs = { text = signs },
-                virtual_text = virtual_text_enabled,
-                underline = true, -- Always on
-                update_in_insert = true,
-                float = {
-                    focusable = false,
-                    style = "minimal",
-                    border = "solid",
-                    source = true,
-                },
-            })
-        end
-
-        -- call initial diagnostic setup
-        update_diagnostic_config()
-
-        -- LSP Toggle Keymaps
-        -- <leader>lx toggle for virtual text (no hover changes)
-        vim.keymap.set("n", "<leader>lx", function()
-            virtual_text_enabled = not virtual_text_enabled
-            update_diagnostic_config()
-        end, { desc = "切换显示 LSP 诊断" })
-
-        -- <leader>ll toggle between virtual text mode and precise hover mode
-        vim.keymap.set("n", "<leader>ll", function()
-            virtual_text_enabled = not virtual_text_enabled
-            update_diagnostic_config()
-
-            -- Clear autocmds first
-            vim.api.nvim_clear_autocmds({ group = augroup })
-
-            -- Enable hover only when virtual text is off
-            if not virtual_text_enabled then
-                vim.api.nvim_create_autocmd("CursorHold", {
-                    group = augroup,
-                    callback = function()
-                        if cursor_over_diagnostic() and not has_floating_win() then
-                            vim.diagnostic.open_float(nil, {
-                                focusable = false,
-                                close_events = {
-                                    "CursorMoved",
-                                    "CursorMovedI",
-                                    "BufHidden",
-                                    "InsertCharPre",
-                                    "WinLeave",
-                                },
-                            })
-                        end
-                    end,
-                })
-            end
-        end, { desc = "切换显示错误信息" })
+        vim.diagnostic.config({
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = "x ",
+                    [vim.diagnostic.severity.WARN] = "! ",
+                    [vim.diagnostic.severity.HINT] = "* ",
+                    [vim.diagnostic.severity.INFO] = "i ",
+                }
+            },
+            virtual_text = true,
+            underline = true,
+            update_in_insert = true,
+            float = {
+                focusable = false,
+                style = "minimal",
+                border = "solid",
+                source = true,
+            },
+        })
 
         vim.keymap.set("n", "<leader>lh", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end, { desc = "切换显示类型推断提示" })
 
-        -- NOTE: Setup servers
-        -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
-        -- local capabilities = cmp_nvim_lsp.default_capabilities()
-        local capabilities = {
-            textDocument = {
-                foldingRange = {
-                    dynamicRegistration = false,
-                    lineFoldingOnly = true,
-                },
-            },
-        }
-        capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-
-        -- Global LSP settings (applied to all servers)
-        vim.lsp.config("*", {
-            capabilities = capabilities,
-        })
-
-        -- 为 GDScript 做支持
-        vim.lsp.config('godot', {
-            name = 'Godot',
-            cmd = { 'nc', '127.0.0.1', '6005' },
-            root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
-            capabilities = capabilities,
-        })
-
-        -- 为 Nushell 做支持
-        if vim.fn.executable("nu") == 1 then
-            vim.lsp.config("nu_lsp", {
-                cmd = { "nu", "--lsp" },
-                filetypes = { "nu" },
-                root_markers = { ".git" },
-            })
-            vim.lsp.enable("nu_lsp")
-        end
-
-        -- 如果安装了 nixd
-        -- 安装方法 nix profile add github:nixos/nixpkgs#nixd
-        if vim.fn.executable("nixd") == 1 then
-            vim.lsp.enable('nixd')
-            if vim.fn.executable("nixfmt") ~= 1 then
-                vim.notify("注意：nixfmt 不在环境中", vim.log.levels.WARN)
-            end
-        end
-
-        vim.lsp.config("tinymist", {
-            formatterMode = "typstyle",
-            exportPDF = "onType",
-            semanticTokens = "disable",
-        })
-
-        vim.lsp.config('vtsls', {
-            filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'vue' },
-            settings = {
-                vtsls = {
-                    tsserver = {
-                        globalPlugins = {
-                            {
-                                name = "@vue/typescript-plugin",
-                                location = vim.fn.stdpath("data")
-                                    .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
-                                languages = { "vue" },
-                                configNamespace = "typescript",
-                            },
-                        },
-                    },
-                },
-                typescript = {
-                    inlayHints = {
-                        enumMemberValues = {
-                            enabled = true,
-                        },
-                        functionLikeReturnTypes = {
-                            enabled = true,
-                        },
-                        parameterNames = { enabled = "all" },
-                        parameterTypes = {
-                            enabled = true,
-                            suppressWhenArgumentMatchesName = true,
-                        },
-                        propertyDeclarationTypes = {
-                            enabled = true,
-                        },
-                        variableTypes = {
-                            enabled = true,
-                        },
-                    },
-                },
-            },
-        })
+        configure_lsp()
+        setup_local_lsp()
     end,
 }
