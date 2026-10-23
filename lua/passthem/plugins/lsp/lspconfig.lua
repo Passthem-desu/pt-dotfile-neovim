@@ -3,73 +3,18 @@ local function setup_local_lsp()
     vim.lsp.config('godot', {
         name = 'Godot',
         cmd = { 'nc', '127.0.0.1', '6005' },
-        root_dir = vim.fs.dirname(vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]),
+        root_dir = vim.fs.dirname(
+            vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]
+        ),
     })
 
-    -- Nushell
-    if vim.fn.executable("nu") == 1 then
-        vim.lsp.config("nu_lsp", {
-            cmd = { "nu", "--lsp" },
-            filetypes = { "nu" },
-            root_markers = { ".git" },
-        })
-        vim.lsp.enable("nu_lsp")
-    end
-
-    -- nix
-    if vim.fn.executable("nixd") == 1 then
-        vim.lsp.enable('nixd')
-        if vim.fn.executable("nixfmt") ~= 1 then
-            vim.notify("注意：nixfmt 不在环境中", vim.log.levels.WARN)
-        end
-    end
-
-    -- Golang
-    if vim.fn.executable("gopls") == 1 then
-        vim.lsp.enable('gopls')
-    end
-
-    -- Typescript
-    if vim.fn.executable("typescript-language-server") == 1 then
-        vim.lsp.enable('ts_ls')
-    end
-
-    -- Python
-    if vim.fn.executable("ruff") == 1 then
-        vim.lsp.enable('ruff')
-    end
-    if vim.fn.executable("basedpyright") == 1 then
-        vim.lsp.enable('basedpyright')
-    end
-
-    -- Rust
-    if vim.fn.executable('rust-analyzer') == 1 then
-        vim.lsp.config('rust_analyzer', {
-            settings = {
-                ['rust-analyzer'] = {
-                    check = {
-                        command = "clippy",
-                    },
-                },
-            },
-        })
-        vim.lsp.enable('rust_analyzer')
-    end
-
-    -- Clangd
-    if vim.fn.executable('clangd') == 1 then
-        vim.lsp.enable('clangd')
-    end
-
-    -- Justfile
-    if vim.fn.executable('just-lsp') == 1 then
-        vim.lsp.enable('just')
-    end
-
-    -- Typst
-    if vim.fn.executable('tinymist') == 1 then
-        vim.lsp.enable('tinymist')
-    end
+    vim.lsp.enable({
+        'nu_lsp', 'nixd', 'gopls', 'ts_ls', 'ruff', 'basedpyright', 'godot',
+        'rust_analyzer', 'clangd', 'just', 'tinymist', 'astro', 'eslint',
+        'eslint_d', 'dockerls', 'docker_compose_language_service', 'svelte',
+        'tailwindcss', 'vue_ls', 'wgsl_analyzer', 'yamlls', 'taplo',
+        'systemd_lsp', 'lua_ls', 'neocmake',
+    })
 end
 
 local function configure_lsp()
@@ -111,6 +56,24 @@ local function configure_lsp()
                 },
             },
         },
+    })
+
+    -- Rust
+    vim.lsp.config('rust_analyzer', {
+        settings = {
+            ['rust-analyzer'] = {
+                check = {
+                    command = "clippy",
+                },
+            },
+        },
+    })
+
+    -- Nushell
+    vim.lsp.config("nu_lsp", {
+        cmd = { "nu", "--lsp" },
+        filetypes = { "nu" },
+        root_markers = { ".git" },
     })
 end
 
