@@ -34,13 +34,9 @@ end
 -- 支持鼠标操作
 vim.opt.mouse = "a"
 
+-- 默认 Shell 是系统 Shell
+vim.o.shell = vim.env.SHELL
 
---->
----> 行号
---->
-
-vim.opt.nu = true
-vim.opt.relativenumber = true
 
 --->
 ---> 缩进与换行
@@ -127,6 +123,10 @@ vim.opt.cursorline = true
 
 -- 不要显示 Intro
 vim.opt.shortmess:append "I"
+
+-- 行号
+vim.opt.nu = true
+vim.opt.relativenumber = true
 
 
 --->

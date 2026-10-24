@@ -74,6 +74,8 @@ vim.keymap.set("n", "<leader>cm", "<cmd>Mason<CR>", { desc = "打开 Mason" })
 vim.keymap.set("n", "<leader>en", "<cmd>edit term://nu<CR>", { desc = "打开 Nushell" })
 vim.keymap.set("n", "<leader>ef", "<cmd>edit term://fish<CR>", { desc = "打开 Fish" })
 vim.keymap.set("n", "<leader>eb", "<cmd>edit term://bash<CR>", { desc = "打开 Bash" })
+vim.keymap.set("n", "<leader>ez", "<cmd>edit term://zsh<CR>", { desc = "打开 Zsh" })
+vim.keymap.set("n", "<leader>es", "<cmd>terminal<CR>", { desc = "打开系统默认 Shell" })
 
 --->
 ---> 控制台内
@@ -94,3 +96,34 @@ vim.keymap.set('c', '<C-b>', '<Left>', { noremap = true, desc = '向左移动一
 vim.keymap.set('c', '<C-f>', '<Right>', { noremap = true, desc = '向右移动一个字符' })
 vim.keymap.set('c', '<M-b>', '<S-Left>', { noremap = true, desc = '向左移动一个单词' })
 vim.keymap.set('c', '<M-f>', '<S-Right>', { noremap = true, desc = '向右移动一个单词' })
+
+--->
+---> 个人习惯的一些操作逻辑
+--->
+
+vim.keymap.set('n', '<leader>w%', '<C-w>v', { noremap = true, desc = '水平分屏' })
+vim.keymap.set('n', '<leader>w"', '<C-w>s', { noremap = true, desc = '竖直分屏' })
+vim.keymap.set('n', '<leader>wd', function ()
+    local wincount = #vim.api.nvim_tabpage_list_wins(0)
+    if wincount == 1 then
+        vim.cmd("enew")
+    else
+        vim.api.nvim_win_close(0, false)
+    end
+end, { noremap = true, desc = '关闭分屏' })
+vim.keymap.set('n', '<leader>wT', '<C-w>T', { noremap = true, desc = '在新标签页打开当前窗口' })
+
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { noremap = true, desc = '关闭当前 Buffer' })
+vim.keymap.set('n', '<leader>td', '<cmd>tabclose<CR>', { noremap = true, desc = '关闭当前标签页' })
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<CR>', { noremap = true, desc = '新建标签页' })
+
+vim.keymap.set('n', '<C-/>', '<C-w>v<cmd>terminal<CR>', { noremap = true, desc = '在右侧打开一个控制台' })
+
+--->
+---> IME misc
+--->
+
+vim.keymap.set('n', '：', ':', { noremap = true })
+vim.keymap.set('n', '，', ',', { noremap = true })
+vim.keymap.set('n', '。', '.', { noremap = true })
+
