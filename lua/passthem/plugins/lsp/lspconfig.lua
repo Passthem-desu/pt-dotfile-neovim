@@ -1,12 +1,12 @@
 local function setup_local_lsp()
-    -- GDScript
-    vim.lsp.config('godot', {
-        name = 'Godot',
-        cmd = { 'nc', '127.0.0.1', '6005' },
-        root_dir = vim.fs.dirname(
-            vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]
-        ),
-    })
+    -- -- GDScript
+    -- vim.lsp.config('godot', {
+    --     name = 'Godot',
+    --     cmd = { 'nc', '127.0.0.1', '6005' },
+    --     root_dir = vim.fs.dirname(
+    --         vim.fs.find({ 'project.godot', '.git' }, { upward = true })[1]
+    --     ),
+    -- })
 
     vim.lsp.enable({
         'nu_lsp', 'nixd', 'gopls', 'ts_ls', 'ruff', 'basedpyright', 'godot',
@@ -77,6 +77,49 @@ local function configure_lsp()
     })
 end
 
+local function diagnostic_utils()
+    -- 这个闭包用来提供一个状态机，供外界使用
+
+    local virtual_text = false
+    local underline = true
+
+    -- 设置初始状态
+    vim.diagnostic.config({
+        signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = "x ",
+                [vim.diagnostic.severity.WARN] = "! ",
+                [vim.diagnostic.severity.HINT] = "* ",
+                [vim.diagnostic.severity.INFO] = "i ",
+            }
+        },
+        virtual_text = virtual_text,
+        underline = underline,
+        update_in_insert = true,
+        float = {
+            focusable = false,
+            style = "minimal",
+            border = "solid",
+            source = true,
+        },
+    })
+
+    return {
+        toggle_virtual_text = function ()
+            virtual_text = !virtual_text
+            vim.diagnostic.config({
+                virtual_text = virtual_text,
+            })
+        end,
+        toggle_underline = function ()
+            underline = !underline
+            vim.diagnostic.config({
+                underline = underline,
+            })
+        end,
+    }
+end
+
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -116,30 +159,17 @@ return {
             end,
         })
 
-        -- update diagnostic config function
-        vim.diagnostic.config({
-            signs = {
-                text = {
-                    [vim.diagnostic.severity.ERROR] = "x ",
-                    [vim.diagnostic.severity.WARN] = "! ",
-                    [vim.diagnostic.severity.HINT] = "* ",
-                    [vim.diagnostic.severity.INFO] = "i ",
-                }
-            },
-            virtual_text = true,
-            underline = true,
-            update_in_insert = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "solid",
-                source = true,
-            },
-        })
+        local utils = diagnostic_utils()
 
         vim.keymap.set("n", "<leader>lh", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        end, { desc = "切换显示类型推断提示" })
+        end, { desc = "类型标签" })
+        vim.keymap.set("n", "<leader>ll", function ()
+            utils.toggle_virtual_text()
+        end, { desc = "行内错误标注" })
+        vim.keymap.set("n", "<leader>lu", function ()
+            utils.toggle_underline()
+        end, { desc = "下划线" })
 
         configure_lsp()
         setup_local_lsp()
