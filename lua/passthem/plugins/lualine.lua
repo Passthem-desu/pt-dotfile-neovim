@@ -2,6 +2,9 @@ if true then
     return {
         'nvim-lualine/lualine.nvim',
 
+        -- 状态栏晚一帧出现，避免占用启动时间
+        event = "VeryLazy",
+
         config = function()
             local lualine = require("lualine")
             lualine.setup({

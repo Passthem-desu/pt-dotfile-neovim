@@ -41,6 +41,7 @@ return {
     },
     { -- 把东西在单行和多行之间切换
         "nvim-mini/mini.splitjoin",
+        event = "VeryLazy",
         config = function()
             local mini_splitjoin = require("mini.splitjoin")
 
@@ -65,12 +66,14 @@ return {
     },
     {
         "nvim-mini/mini.cursorword",
+        event = "VeryLazy",
         config = function()
             require('mini.cursorword').setup()
         end
     },
     {
         "nvim-mini/mini.align",
+        event = "VeryLazy",
         config = function()
             require('mini.align').setup()
         end
