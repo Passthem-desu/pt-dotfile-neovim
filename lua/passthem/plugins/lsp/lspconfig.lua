@@ -106,13 +106,13 @@ local function diagnostic_utils()
 
     return {
         toggle_virtual_text = function ()
-            virtual_text = !virtual_text
+            virtual_text = not virtual_text
             vim.diagnostic.config({
                 virtual_text = virtual_text,
             })
         end,
         toggle_underline = function ()
-            underline = !underline
+            underline = not underline
             vim.diagnostic.config({
                 underline = underline,
             })
