@@ -39,6 +39,22 @@ local function configure_lsp()
         semanticTokens = "disable",
     })
 
+    vim.lsp.config('basedpyright', {
+        settings = {
+            basedpyright = {
+                analysis = {
+                    typeCheckingMode = 'standard',
+                    diagnosticSeverityOverrides = {
+                        reportMissingTypeArgument = 'warning',
+                        reportUnusedCallResult = 'none',
+                        reportAny = 'none',
+                        reportExplicitAny = 'none',
+                    },
+                },
+            },
+        },
+    })
+
     vim.lsp.config('vtsls', {
         filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact', 'vue' },
         settings = {
