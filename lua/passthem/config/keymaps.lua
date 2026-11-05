@@ -66,6 +66,21 @@ vim.keymap.set("n", "<leader>cf", function()
 end, { desc = "格式化代码" })
 vim.keymap.set("n", "<leader>cm", "<cmd>Mason<CR>", { desc = "打开 Mason" })
 
+--->
+---> AI
+--->
+
+vim.keymap.set("n", "<leader>ai", function()
+    if vim.fn.executable("pi") ~= 1 then
+        vim.notify("未找到 pi cli", vim.log.levels.WARN)
+        return
+    end
+
+    vim.cmd("botright vsplit")
+    vim.cmd("terminal pi")
+    vim.cmd("startinsert")
+end, { desc = "在右侧打开 pi" })
+
 
 --->
 ---> 文件管理

@@ -23,6 +23,7 @@ return {
         wk.add({ "<leader>g", group = "git" })
         wk.add({ "<leader>v", group = "vim" })
         wk.add({ "<leader>c", group = "代码" })
+        wk.add({ "<leader>a", group = "AI" })
         wk.add({ "<leader>e", group = "文件管理" })
     end,
     opts = {},
