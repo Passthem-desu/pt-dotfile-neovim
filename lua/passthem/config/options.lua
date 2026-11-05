@@ -119,7 +119,7 @@ vim.opt.cmdheight = 0
 vim.opt.colorcolumn = "80,100"
 
 -- 标注光标所在行
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- 不要显示 Intro
 vim.opt.shortmess:append "I"
