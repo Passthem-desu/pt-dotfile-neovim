@@ -32,7 +32,8 @@ if vim.fn.has("unix") == 1 then
 end
 
 -- 支持鼠标操作
-vim.opt.mouse = "a"
+-- vim.opt.mouse = "a"
+vim.opt.mouse = ""
 
 -- 默认 Shell 是系统 Shell
 vim.o.shell = vim.env.SHELL
