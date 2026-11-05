@@ -7,43 +7,33 @@ return {
         "andrew-george/telescope-themes",
     },
     config = function ()
-        local actions = require("telescope.actions")
-
         require('telescope').setup {
-            defaults = {
-                -- initial_mode = "normal",
-            },
             pickers = {
                 buffers = {
                     sort_mru = true,
                     ignore_current_buffer = true,
-                    mappings = {
-                        i = {
-                            ["<C-d>"] = actions.delete_buffer,
-                        }
-                    }
                 },
             },
         }
 
-        local builtin = require('telescope.builtin')
-
-        vim.keymap.set('n', '<leader>pb', builtin.buffers, { desc = '查找 Buffers' })
-        vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = '在所有文件搜索' })
-        vim.keymap.set('n', '<leader>ph', builtin.help_tags, { desc = 'NeoVim 帮助' })
-        vim.keymap.set('n', '<leader>pm', function ()
-            builtin.man_pages({
+        local b = require('telescope.builtin')
+        local man_pages = function ()
+            b.man_pages({
                 sections = { "ALL" }
             })
-        end, { desc = '搜索 Manpage' })
-        vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'git status' })
-        vim.keymap.set('n', '<leader>ps', builtin.git_status, { desc = 'git status' })
-        vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'git branch' })
-        vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = '查找文件' })
-        vim.keymap.set('n', '<leader>pk', builtin.keymaps, { desc = '查找键位' })
-        vim.keymap.set('n', '<leader>pd', builtin.diagnostics, { desc = '查找工作区代码诊断' })
-        vim.keymap.set('n', '<leader>pt', builtin.filetypes, { desc = '设置文件类型' })
-        vim.keymap.set('n', '<leader>pq', builtin.quickfix, { desc = 'Quickfix' })
-        vim.keymap.set('n', '<leader>pl', builtin.loclist, { desc = 'Location List' })
+        end
+
+        vim.keymap.set('n', '<leader>pb', b.buffers,      { desc = '查找 Buffers'       })
+        vim.keymap.set('n', '<leader>pg', b.live_grep,    { desc = '在所有文件搜索'     })
+        vim.keymap.set('n', '<leader>ph', b.help_tags,    { desc = 'NeoVim 帮助'        })
+        vim.keymap.set('n', '<leader>pm', man_pages,      { desc = '搜索 Manpage'       })
+        vim.keymap.set('n', '<leader>gs', b.git_status,   { desc = 'git status'         })
+        vim.keymap.set('n', '<leader>gb', b.git_branches, { desc = 'git branch'         })
+        vim.keymap.set('n', '<leader>pf', b.find_files,   { desc = '查找文件'           })
+        vim.keymap.set('n', '<leader>pk', b.keymaps,      { desc = '查找键位'           })
+        vim.keymap.set('n', '<leader>pd', b.diagnostics,  { desc = '查找工作区代码诊断' })
+        vim.keymap.set('n', '<leader>pt', b.filetypes,    { desc = '设置文件类型'       })
+        vim.keymap.set('n', '<leader>pq', b.quickfix,     { desc = 'Quickfix'           })
+        vim.keymap.set('n', '<leader>pl', b.loclist,      { desc = 'Location List'      })
     end
 }
