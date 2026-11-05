@@ -155,3 +155,8 @@ vim.filetype.add({
         mdx = 'mdx'
     }
 })
+
+--->
+---> vim._core.ui2
+--->
+require('vim._core.ui2').enable()
