@@ -155,6 +155,11 @@ vim.filetype.add({
         mdx = 'mdx'
     }
 })
+vim.filetype.add({
+    extension = {
+        ebnf = 'ebnf',
+    }
+})
 
 --->
 ---> vim._core.ui2
