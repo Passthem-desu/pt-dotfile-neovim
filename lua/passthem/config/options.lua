@@ -2,33 +2,18 @@
 
 if vim.fn.has("unix") == 1 then
     vim.opt.shell = "/bin/bash"
-    if vim.env.SSH_CONNECTION or vim.env.SSH_TTY then
-        vim.g.clipboard = {
-            name = 'osc52-copy-only',
-            copy = {
-                ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-                ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-            },
-            paste = {
-                ['+'] = function() return {} end,
-                ['*'] = function() return {} end,
-            },
-            cache_enabled = 0,
-        }
-    elseif vim.fn.has("wsl") then
-        vim.g.clipboard = {
-            name = 'win32yank',
-            copy = {
-                ['+'] = 'win32yank.exe -i --crlf',
-                ['*'] = 'win32yank.exe -i --crlf',
-            },
-            paste = {
-                ['+'] = 'win32yank.exe -o --lf',
-                ['*'] = 'win32yank.exe -o --lf',
-            },
-            cache_enabled = 1,
-        }
-    end
+    vim.g.clipboard = {
+        name = 'osc52-copy-only',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+        },
+        paste = {
+            ['+'] = function() return {} end,
+            ['*'] = function() return {} end,
+        },
+        cache_enabled = 0,
+    }
 end
 
 -- 支持鼠标操作
