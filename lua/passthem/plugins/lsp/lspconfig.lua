@@ -13,7 +13,7 @@ local function setup_local_lsp()
         'rust_analyzer', 'clangd', 'just', 'tinymist', 'astro', 'eslint',
         'eslint_d', 'dockerls', 'docker_compose_language_service', 'svelte',
         'tailwindcss', 'vue_ls', 'wgsl_analyzer', 'yamlls', 'taplo',
-        'systemd_lsp', 'lua_ls', 'neocmake', 'zls',
+        'systemd_lsp', 'lua_ls', 'neocmake', 'zls', 'c3_lsp',
     })
 end
 
